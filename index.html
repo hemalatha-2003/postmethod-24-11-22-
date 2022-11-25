@@ -15,26 +15,63 @@
 			margin-top: 6%;
 			margin-right: 5%;
 		}
+		#sports {
+			padding: 0.8%;
+			border-radius:2px ;
+			background-color: lightseagreen;
+			color: white;
+		}
+		.sub{
+			background-color: black;
+			color: white;
+			padding: 0.5%;
+			width: 7%;
+			border-radius: 25px;
+			font-size: 18px;
+			font-family: 'Poppins',sans-serif;
+		}
+
+
 	</style>
 </head>
 <body> 
 	<div class="vibe">
+		<h1>Registration page</h1>
 		<p><input id="username" placeholder="enter your name"/></p>
 		<p><input id="password" placeholder="enter password"></p>
-		<p><button onclick="huge()">submit</button></p>
-    </div>
+		<select id="sports">
+			<option>select a game</option>
+			<option>tennis</option>
+			<option>coco</option>
+			<option>cricket</option>
+			<option>kabadi</option>
+			<option>badminton</option>
+		</select>
+		<p>select your gender</p>
+		<p><input id="male"  type="radio" value="male" name="gender">male
+		<input id="female" type="radio" value="female" name="gender">female</p>
+		<p><button class="sub" onclick="huge()">submit</button></p>
+	</div>
 	<script type="text/javascript">
 		function huge(){
 			var username=document.getElementById("username").value
 			console.log(username)
 			var password=document.getElementById("password").value
 			console.log(password)
+			var sports=document.getElementById("sports").value
+			console.log(sports)
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			//console.log(gmale,gfemale)
+			if(gmale==true) var gender="male"
+			else var gender="female"
+			console.log(gender)
 			fetch("http://localhost:2700/newData",{
 				method:"POST",
 				headers:{
 					"content-Type":"application/json"
 				},
-				body:JSON.stringify({name:username,password:password})
+				body:JSON.stringify({name:username,password:password,game:sports,gender:gmale,gender:gfemale})
 			})
 			.then((res)=>{
 				console.log(res)
